@@ -10,6 +10,9 @@ import (
 	测试有缓存和无缓存通道
 	如果不设置缓存数，并发写入会有问题
 */
+
+const zero = 0.0
+
 func test1(ch chan int, wg *sync.WaitGroup) {
 	defer wg.Done()
 	ch <- 1
@@ -21,6 +24,7 @@ func test2(ch chan int, wg *sync.WaitGroup) {
 
 func main() {
 
+	//x := []int{1,2,3, 2,3,4,}
 	/*
 		测试有缓存和无缓存通道
 		如果不设置缓存数，并发写入会有问题
@@ -89,34 +93,58 @@ func main() {
 	//	fmt.Println("no activity")
 	//}
 
-	messages := make(chan string)
-	signals := make(chan bool)
+	//messages := make(chan string)
+	//signals := make(chan bool)
+	//go func() {
+	//	messages <- "jj"
+	//}()
+	//select {
+	//case msg := <-messages:
+	//	fmt.Println("received message", msg)
+	//case <-time.After(2 * time.Second):
+	//	fmt.Println("no message received")
+	//}
+	//
+	//msg := "hi"
+	//select {
+	//case messages <- msg:
+	//	fmt.Println("sent message", msg)
+	//default:
+	//	fmt.Println("no message sent")
+	//}
+	//
+	//select {
+	//case msg := <-messages:
+	//	fmt.Println("received message", msg)
+	//case sig := <-signals:
+	//	fmt.Println("received signal", sig)
+	//default:
+	//	fmt.Println("no activity")
+	//}
+
+	//c1:=make(chan string, 2)
+	////func(){
+	////	time.Sleep(time.Second)
+	//	c1 <-"1"
+	////}()
+	//fmt.Println("c1 is",<-c1)
+
+	//queue := make(chan string, 2)
+	//queue <- "one"
+	//close(queue)
+	//
+	////queue <- "two"
+	//for elem := range queue {
+	//	fmt.Println(elem)
+	//}
+	ch := make(chan string)
 	go func() {
-		messages <- "jj"
+		ch <- "ee"
+		//time.Sleep(1*time.Second)
 	}()
-	select {
-	case msg := <-messages:
-		fmt.Println("received message", msg)
-	case <-time.After(2 * time.Second):
-		fmt.Println("no message received")
-	}
+	fmt.Println(<-ch)
 
-	msg := "hi"
-	select {
-	case messages <- msg:
-		fmt.Println("sent message", msg)
-	default:
-		fmt.Println("no message sent")
-	}
-
-	select {
-	case msg := <-messages:
-		fmt.Println("received message", msg)
-	case sig := <-signals:
-		fmt.Println("received signal", sig)
-	default:
-		fmt.Println("no activity")
-	}
+	close(ch)
 
 }
 
