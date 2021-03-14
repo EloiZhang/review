@@ -32,33 +32,30 @@ func (p Product2) SetName(name string) {
 }
 
 
-//工厂名
-type ProductFacory struct {
-
+//抽象工厂
+type AbstractFactory interface {
+	Create() Product
 }
 
-//工厂方法
-func (pf ProductFacory) Create(op int) Product {
-	if op == 1 {
-		return &Product1{}
-	}
+//实现产品1的工厂
+type Product1Factory struct{}
 
-	if op == 2 {
-		return &Product2{}
-	}
-	return nil
+func (pf1 Product1Factory) Create() Product {
+	return &Product1{}
 }
 
-//知道工厂名、工厂方法、产品在工厂内的参数，就可以创建指定的产品
+//实现产品2的工厂
+type Product2Factory struct{}
+
+func (pf2 Product2Factory) Create() Product {
+	return &Product2{}
+}
+
 func main() {
-	p1 := &Product1{}
+	factory := &Product1Factory{}
+	p1 := factory.Create()
 	p1.SetName("酸奶")
-	fmt.Println(p1.name)
-
-	factory := ProductFacory{}
-	product := factory.Create(1)
-	product.SetName("醋")
-	println(product.GetName())
+	fmt.Println(p1.GetName())
 }
 
 
