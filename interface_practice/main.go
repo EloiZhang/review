@@ -12,16 +12,26 @@ Go 语言在编译期间对代码进行类型检查，上述代码总共触发�
 */
 
 func main() {
-	var rpcErr error
-	rpcErr = NewRpcError()
-	err := Assr(rpcErr)
-	println(err)
+	//var rpcErr error
+	//rpcErr = NewRpcError()
+	//err := Assr(rpcErr)
+	//println(err)
+
+
+	type test struct {}
+	//v := test{}
+	//Print(v)
 }
+
+func Print(v interface{}) {
+	println(v)
+}
+
+
 
 func Assr(err error) error {
 	return err
 }
-
 //声明interface
 type error interface {
 	Error() string
