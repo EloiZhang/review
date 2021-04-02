@@ -149,7 +149,7 @@ func main() {
 }
 
 func worker(channel chan string) {
-	fmt.Println("test")
+	fmt.Println("slice")
 	time.Sleep(2 * time.Second)
 	fmt.Println("done")
 	channel <- "true"
@@ -163,7 +163,7 @@ func GetChannelMessage() {
 	go func() {
 		//赋值给channel
 		channel <- "hello world"
-		//channel <- "test"
+		//channel <- "slice"
 
 	}()
 

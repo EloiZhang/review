@@ -19,7 +19,7 @@ func main() {
 
 
 	type test struct {}
-	//v := test{}
+	//v := slice{}
 	//Print(v)
 }
 
